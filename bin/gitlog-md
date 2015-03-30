@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'rubygems' unless defined?(Gem)
+require 'gitlog-md'
+
+GitlogMD::CLI.new.execute
