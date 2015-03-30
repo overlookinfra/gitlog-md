@@ -28,5 +28,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'yard'
 
   # Run time dependencies
-  s.add_development_dependency 'gitlab-grit'
+  s.add_runtime_dependency 'gitlab-grit'
 end
