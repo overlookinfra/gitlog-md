@@ -14,7 +14,12 @@ module GitlogMD
 
       repo = Grit::Repo.new(repo_dir)
       head = Grit::Tag.new(repo.commits(branch).first.sha, repo, repo.commits(branch).first.id)
-      tags = repo.tags + [head]
+      # commits for this branch
+      commits = repo.commits(branch, repo.commit_count).map{ |commit| commit.sha }
+      # remove tags not associated with this branch
+      tags = repo.tags.delete_if{ |t| not commits.include?(t.commit.sha) }
+
+      tags = tags + [head]
       tags.sort! {|x,y| y.commit.authored_date <=> x.commit.authored_date}
 
       output << "## Tags\n"
